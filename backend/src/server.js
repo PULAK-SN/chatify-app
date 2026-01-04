@@ -4,6 +4,7 @@ import path from "path";
 
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
+import { connectDB } from "./lib/db.js";
 
 dotenv.config();
 
@@ -11,6 +12,8 @@ const app = express();
 const __dirname = path.resolve();
 
 const PORT = process.env.PORT || 5000;
+
+app.use(express.json()); // req.body
 
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
@@ -23,6 +26,19 @@ if (process.env.NODE_ENV === "production") {
     res.send(path.join(__dirname, "../frontend/dist/index.html"));
   });
 }
-app.listen(PORT, () => {
-  console.log("Server is running at port: " + PORT);
-});
+
+// app.listen(PORT, () => {
+//   console.log("Server is running at port: " + PORT);
+//   connectDB();
+// });
+
+connectDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log("Server is running at port: " + PORT);
+    });
+  })
+  .catch((err) => {
+    console.error("Faild to connect to MongoDB", err);
+    process.exit(1);
+  });
