@@ -55,11 +55,13 @@ export const signup = async (req, res) => {
         profilePic: savedUser.profilePic,
       });
 
-      try {
-        sendWelcomeEmail(savedUser.email, savedUser.fullName, ENV.CLIENT_URL);
-      } catch (error) {
+      sendWelcomeEmail(
+        savedUser.email,
+        savedUser.fullName,
+        ENV.CLIENT_URL
+      ).catch((error) => {
         console.error("Faild to send welcome email", error);
-      }
+      });
     } else {
       return res.status(400).json({ message: "Invalid user data" });
     }
