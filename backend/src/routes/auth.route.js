@@ -4,7 +4,7 @@ import {
   login,
   logout,
   updateProfile,
-} from "../controllers/auth.controllers.js";
+} from "../controllers/auth.controller.js";
 import { protectedRoute } from "../middlewire/auth.middlewire.js";
 import { arcjetProtection } from "../middlewire/arcjet.middlewire.js";
 
@@ -21,6 +21,6 @@ router.post("/logout", logout);
 router.put("/update-profile", protectedRoute, updateProfile);
 
 router.get("/check", protectedRoute, (req, res) =>
-  res.status(200).json(req.user)
+  res.status(200).json(req.user),
 );
 export default router;
