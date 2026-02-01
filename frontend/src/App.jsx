@@ -1,11 +1,11 @@
 import { Route, Routes, Navigate } from "react-router";
-import ChatPage from "./pages/ChatPage";
 import LogInPage from "./pages/LogInPage";
 import SignUpPage from "./pages/SignUpPage";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
-import { PageLoader } from "./components/PageLoader";
+import PageLoader from "./components/PageLoader";
 import { Toaster } from "react-hot-toast";
+import ChatPage from "./pages/ChatPage";
 
 const App = () => {
   const { checkAuth, isCheckingAuth, authUser } = useAuthStore();
@@ -14,7 +14,7 @@ const App = () => {
     checkAuth();
   }, [checkAuth]);
 
-  console.log({ authUser });
+  // console.log({ authUser });
   if (isCheckingAuth) return <PageLoader />;
   return (
     <div className="min-h-screen bg-slate-900 relative flex items-center justify-center p-4 overflow-hidden">
