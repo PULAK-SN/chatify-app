@@ -78,12 +78,12 @@ export const login = async (req, res) => {
   try {
     const user = await User.findOne({ email: email });
 
+    if (!user) return res.status(400).json({ message: "Invalid credentials" });
+
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect)
-      return res.status(400).json({ message: "Invalid credentials-password" });
+      return res.status(400).json({ message: "Invalid credentials" });
 
-    if (!user)
-      return res.status(400).json({ message: "Invalid credentials-email" });
     genetareToken(user._id, res);
 
     res.status(200).json({
@@ -114,7 +114,7 @@ export const updateProfile = async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { profilePic: uploadResponse.secure_url },
-      { new: true }
+      { new: true },
     ).select("-password");
 
     res.status(200).json(updatedUser);
