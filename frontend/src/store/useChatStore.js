@@ -9,7 +9,7 @@ export const useChatStore = create((set, get) => ({
   selectedUser: null,
   isUserLoading: false,
   isMessageLoading: false,
-  isSoundEnabled: localStorage.getItem("isSoundEnabled") === true,
+  isSoundEnabled: JSON.parse(localStorage.getItem("isSoundEnabled")) === true,
 
   toggleSound: () => {
     localStorage.setItem("isSoundEnabled", !get().isSoundEnabled);
@@ -25,7 +25,7 @@ export const useChatStore = create((set, get) => ({
       set({ allContacts: res.data });
     } catch (error) {
       console.error("Error in getAllContacts: ", error);
-      toast.error(error.response.data.messages);
+      toast.error(error?.response?.data?.messages);
     } finally {
       set({ isUserLoading: false });
     }
@@ -37,7 +37,7 @@ export const useChatStore = create((set, get) => ({
       set({ chats: res.data });
     } catch (error) {
       console.error("Error in getChatPartners: ", error);
-      toast.error(error.response.data.messages);
+      toast.error(error?.response?.data?.messages);
     } finally {
       set({ isUserLoading: false });
     }
