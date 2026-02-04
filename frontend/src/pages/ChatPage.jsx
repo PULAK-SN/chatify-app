@@ -1,7 +1,7 @@
 import { useChatStore } from "../store/useChatStore";
 import {
   ProfileHeader,
-  ActivetTabSwitch,
+  ActiveTabSwitch,
   ChatsList,
   ContactList,
   BorderAnimatedContainer,
@@ -17,7 +17,7 @@ const ChatPage = () => {
         {/* LEFT SIDE */}
         <div className="w-80 bg-slate-900/30 backdrop-blur-sm flex flex-col">
           <ProfileHeader />
-          <ActivetTabSwitch />
+          <ActiveTabSwitch />
           <div className="flex-1 overflow-y-auto p-4 space-y-2">
             {activeTab === "chats" ? <ChatsList /> : <ContactList />}
           </div>
