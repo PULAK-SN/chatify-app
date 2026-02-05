@@ -1,20 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useChatStore } from "../store/useChatStore";
 import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
 import MessagesLoadingSkeleton from "./MessageLodingSkeleton";
-import NoConversationPlaceholder from "./NoConversationPlaceholder";
 import NoChatHistoryPlaceholder from "./NoChatHistoryPlaceholder";
 
 const ChatConteiner = () => {
   const { selectedUser, getMessagesByUserId, messages, isMessageLoading } =
     useChatStore();
   const { authUser } = useAuthStore();
+  const messageEndRef = useRef(null);
 
   useEffect(() => {
     getMessagesByUserId(selectedUser._id);
   }, [selectedUser, getMessagesByUserId]);
+
+  useEffect(() => {
+    if (messageEndRef.current)
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <>
@@ -34,9 +39,9 @@ const ChatConteiner = () => {
                 >
                   {msg.image && (
                     <img
-                      src="msg.image"
+                      src={msg.image}
                       alt="Shared"
-                      className="rounded-lg h-48 object-cover"
+                      className="rounded-lg h-48 object-cover "
                     />
                   )}
                   {msg.text && <p className="mt-2">{msg.text}</p>}
@@ -49,6 +54,8 @@ const ChatConteiner = () => {
                 </div>
               </div>
             ))}
+
+            <div ref={messageEndRef} />
           </div>
         ) : isMessageLoading ? (
           <MessagesLoadingSkeleton />
