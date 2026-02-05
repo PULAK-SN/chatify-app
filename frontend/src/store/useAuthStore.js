@@ -29,7 +29,7 @@ export const useAuthStore = create((set) => ({
       toast.success("Account created successfully");
     } catch (error) {
       console.error("Error in signing up: ", error);
-      toast.error(error?.response?.data?.messages);
+      toast.error(error.response?.data?.messages || "Something went wrong");
     } finally {
       set({ isSigningUp: false });
     }
@@ -44,7 +44,7 @@ export const useAuthStore = create((set) => ({
       toast.success("Logged in successfully");
     } catch (error) {
       console.error("Error in Logging in: ", error);
-      toast.error(error?.response?.data?.messages);
+      toast.error(error.response?.data?.messages || "Something went wrong");
     } finally {
       set({ isLoggingIn: false });
     }
@@ -58,7 +58,7 @@ export const useAuthStore = create((set) => ({
       toast.success("Logged out successfully");
     } catch (error) {
       console.error("Error in Logging out: ", error);
-      toast.error(error?.response?.data?.messages);
+      toast.error(error.response?.data?.messages || "Something went wrong");
     }
   },
 
@@ -70,7 +70,7 @@ export const useAuthStore = create((set) => ({
       toast.success("Profile update successfully");
     } catch (error) {
       console.error("Error in updating profile: ", error);
-      toast.error(error?.response?.data?.messages);
+      toast.error(error.response?.data?.messages || "Something went wrong");
     } finally {
       set({ isUpdatingProfile: false });
     }
