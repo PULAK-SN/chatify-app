@@ -7,7 +7,7 @@ import { ImageIcon, SendIcon, XIcon } from "lucide-react";
 const MessageInput = () => {
   const { playRandomKeyStrokeSound } = useKeyboardSounds();
 
-  const [text, setText] = useState();
+  const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
   const { sendMessage, isSoundEnabled } = useChatStore();

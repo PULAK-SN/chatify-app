@@ -5,8 +5,8 @@ import {
   getChatPartners,
   getMessagesByUserId,
 } from "../controllers/message.controller.js";
-import { protectedRoute } from "../middlewire/auth.middlewire.js";
-import { arcjetProtection } from "../middlewire/arcjet.middlewire.js";
+import { protectedRoute } from "../middleware/auth.middleware.js";
+import { arcjetProtection } from "../middleware/arcjet.middleware.js";
 const router = express.Router();
 
 router.use(arcjetProtection, protectedRoute);
