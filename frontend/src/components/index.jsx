@@ -4,7 +4,7 @@ import ChatsList from "./ChatsList";
 import ContactList from "./ContactList";
 import PageLoader from "./PageLoader";
 import ProfileHeader from "./ProfileHeader";
-import ChatConteiner from "./ChatConteiner";
+import ChatContainer from "./ChatContainer";
 import NoConversationPlaceholder from "./NoConversationPlaceholder";
 export {
   ActiveTabSwitch,
@@ -13,6 +13,6 @@ export {
   ContactList,
   PageLoader,
   ProfileHeader,
-  ChatConteiner,
+  ChatContainer,
   NoConversationPlaceholder,
 };
