@@ -23,7 +23,9 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
-
+app.get("/api/test", (req, res) => {
+  res.status(200).json({ message: "This is a test route" });
+});
 // make ready for deployment
 if (ENV.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
@@ -32,11 +34,6 @@ if (ENV.NODE_ENV === "production") {
     res.send(path.join(__dirname, "../frontend/dist/index.html"));
   });
 }
-
-// app.listen(PORT, () => {
-//   console.log("Server is running at port: " + PORT);
-//   connectDB();
-// });
 
 connectDB()
   .then(() => {
